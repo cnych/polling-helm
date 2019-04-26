@@ -55,8 +55,8 @@ spec:
             value: {{ .Values.database.internal.username }}
           - name: MYSQL_PASSWORD
             value: {{ .Values.database.internal.password }}
-          # - name: MYSQL_ROOT_PASSWORD
-            # value: {{ .Values.database.internal.rootPassword }}
+          - name: MYSQL_ROOT_PASSWORD
+            value: {{ .Values.database.internal.rootPassword }}
         # envFrom:
         #   - secretRef:
         #       name: "{{ template "polling.database" . }}"
