@@ -41,7 +41,7 @@ ui:
 api:
   image:
     repository: cnych/polling-api
-    tag: 0.0.3
+    tag: 0.0.4
     pullPolicy: IfNotPresent
     pullSecret: ""
   replicas: 1
