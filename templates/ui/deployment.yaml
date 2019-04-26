@@ -33,9 +33,6 @@ spec:
         resources:
 {{ toYaml .Values.ui.resources | indent 10 }}
 {{- end }}
-        env:
-        - name: APISERVER_URL
-          value: "{{ template "polling.api.url" . }}"
         ports:
         - name: http
           containerPort: 80

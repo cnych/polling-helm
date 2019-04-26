@@ -3,7 +3,6 @@
 Expand the name of the chart.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
-
 {{- define "polling.name" -}}
 {{- default "polling" .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
@@ -81,10 +80,6 @@ app: "{{ template "polling.name" . }}"
 
 {{- define "polling.api" -}}
   {{- printf "%s-api" (include "polling.fullname" .) -}}
-{{- end -}}
-
-{{- define "polling.api.url" -}}
-  {{- printf "http://%s:8080" (include "polling.api" .) -}}
 {{- end -}}
 
 {{- define "polling.ui" -}}
