@@ -28,4 +28,8 @@ spec:
         backend:
           serviceName: {{ template "polling.ui" . }}
           servicePort: http
+      - path: /api/
+        backend:
+          serviceName: "{{ template "polling.api" . }}"
+          servicePort: http
 {{- end }}
