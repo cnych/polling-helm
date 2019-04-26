@@ -16,8 +16,7 @@ spec:
       {{- if $nodePort.port }}
       nodePort: {{ $nodePort.port }}
       {{- end }}
-{{- else -}}
-  type: NodePort
+{{- else }}
   ports:
     - name: http
       port: 80
