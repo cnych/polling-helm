@@ -7,6 +7,10 @@ metadata:
     component: ui
 spec:
   replicas: {{ .Values.ui.replicas }}
+  selector:
+    matchLabels:
+{{ include "polling.matchLabels" . | indent 6 }}
+      component: ui
   template:
     metadata:
       labels:
