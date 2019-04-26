@@ -53,13 +53,9 @@ spec:
             value: {{ .Values.database.internal.database }}
           - name: MYSQL_USER
             value: {{ .Values.database.internal.username }}
-          - name: MYSQL_PASSWORD
-            value: {{ .Values.database.internal.password }}
-          - name: MYSQL_ROOT_PASSWORD
-            value: {{ .Values.database.internal.rootPassword }}
-        # envFrom:
-        #   - secretRef:
-        #       name: "{{ template "polling.database" . }}"
+        envFrom:
+          - secretRef:
+              name: "{{ template "polling.database" . }}"
         volumeMounts:
         - name: database-data
           mountPath: /var/lib/mysql
@@ -68,7 +64,7 @@ spec:
       volumes:
       - name: "database-data"
         emptyDir: {}
-      {{- else if $database.existingClaim }}
+      {{- else if ($database.existingClaim | len) }}
       volumes:
       - name: "database-data"
         persistentVolumeClaim:

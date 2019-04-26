@@ -1,15 +1,7 @@
 expose:
-  # Set the way how to expose the service. Set the type as "ingress" 
-  # or "nodePort" and fill the information in the corresponding 
-  # section
   type: ingress
   tls:
     enabled: true
-    # Fill the name of secret if you want to use your own TLS certificate
-    # and private key. The secret must contain keys named tls.crt and 
-    # tls.key that contain the certificate and private key to use for TLS
-    # The certificate and private key will be generated automatically if 
-    # it is not set
     secretName: ""
   ingress:
     hosts:
@@ -22,12 +14,8 @@ expose:
   nodePort:
     port: 30002
       
-
 persistence:
   enabled: true
-  # Setting it to "keep" to avoid removing PVCs during a helm delete 
-  # operation. Leaving it empty will delete PVCs after the chart deleted
-  resourcePolicy: "keep"
   persistentVolumeClaim:
     database:
       existingClaim: ""
@@ -101,5 +89,6 @@ database:
     username: "user"
     password: "password"
     database: "polling"
+    rootPassword: "changeit"
   ## Additional deployment annotations
   podAnnotations: {}

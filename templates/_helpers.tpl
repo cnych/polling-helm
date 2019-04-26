@@ -79,6 +79,18 @@ app: "{{ template "polling.name" . }}"
   {{- include "polling.database.rawPassword" . | b64enc | quote -}}
 {{- end -}}
 
+{{- define "polling.database.rawRootPassword" -}}
+  {{- if eq .Values.database.type "internal" -}}
+    {{- .Values.database.internal.rootPassword -}}
+  {{- else -}}
+    {{- .Values.database.external.rootPassword -}}
+  {{- end -}}
+{{- end -}}
+
+{{- define "polling.database.encryptedRootPassword" -}}
+  {{- include "polling.database.rawRootPassword" . | b64enc | quote -}}
+{{- end -}}
+
 {{- define "polling.api" -}}
   {{- printf "%s-api" (include "polling.fullname" .) -}}
 {{- end -}}
