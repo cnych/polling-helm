@@ -71,8 +71,6 @@ database:
     username: "polling"
     # 数据库用户密码
     password: "polling321"
-    # 初始化的MYSQL超级用户密码
-    rootPassword: "changeit"
     # resources:
     #  requests:
     #    memory: 256Mi
@@ -86,6 +84,5 @@ database:
     username: "user"
     password: "password"
     database: "polling"
-    rootPassword: "changeit"
   ## Additional deployment annotations
   podAnnotations: {}
