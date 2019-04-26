@@ -36,8 +36,10 @@ spec:
             value: "{{ template "polling.database.username" . }}"
           - name: DB_PASSWORD
             value: "{{ template "polling.database.rawPassword" . }}"
+{{- if .Values.api.resources }}
           resources:
 {{ toYaml .Values.api.resources | indent 12 }}
+{{- end }}
     {{- with .Values.api.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

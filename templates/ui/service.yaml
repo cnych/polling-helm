@@ -7,14 +7,14 @@ metadata:
     component: ui
 spec:
 {{- if eq .Values.expose.type "nodePort" }}
-{{- $nodePort := .Values.expose.nodePort.port }}
+{{- $nodePort := .Values.expose.nodePort }}
   type: NodePort
   ports:
     - name: http
       port: 80
       targetPort: http
-      {{- if $nodePort }}
-      nodePort: {{ $nodePort }}
+      {{- if $nodePort.port }}
+      nodePort: {{ $nodePort.port }}
       {{- end }}
 {{- else -}}
   type: NodePort
