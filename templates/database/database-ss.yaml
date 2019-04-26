@@ -49,6 +49,8 @@ spec:
 {{ toYaml .Values.database.internal.resources | indent 10 }}
 {{- end }}
         env:
+          - name: MYSQL_ALLOW_EMPTY_PASSWORD
+            value: "1"
           - name: MYSQL_DATABASE
             value: {{ .Values.database.internal.database }}
           - name: MYSQL_USER
@@ -64,7 +66,7 @@ spec:
       volumes:
       - name: "database-data"
         emptyDir: {}
-      {{- else if ($database.existingClaim | len) }}
+      {{- else if $database.existingClaim }}
       volumes:
       - name: "database-data"
         persistentVolumeClaim:

@@ -13,7 +13,7 @@ expose:
       nginx.ingress.kubernetes.io/proxy-body-size: "0"
   nodePort:
     port: 30002
-      
+
 persistence:
   enabled: true
   persistentVolumeClaim:
