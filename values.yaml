@@ -1,16 +1,13 @@
 expose:
   type: ingress
   tls:
-    enabled: true
+    enabled: false
     secretName: ""
   ingress:
     hosts:
       ui: ui.polling.domain
     annotations:
-      ingress.kubernetes.io/ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/ssl-redirect: "true"
-      ingress.kubernetes.io/proxy-body-size: "0"
-      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      kubernetes.io/ingress.class: nginx
   nodePort:
     port: 30002
 
@@ -44,7 +41,7 @@ ui:
 api:
   image:
     repository: cnych/polling-api
-    tag: 0.0.1
+    tag: 0.0.2
     pullPolicy: IfNotPresent
     pullSecret: ""
   replicas: 1
