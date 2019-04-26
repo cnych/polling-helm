@@ -1,0 +1,105 @@
+expose:
+  # Set the way how to expose the service. Set the type as "ingress" 
+  # or "nodePort" and fill the information in the corresponding 
+  # section
+  type: ingress
+  tls:
+    enabled: true
+    # Fill the name of secret if you want to use your own TLS certificate
+    # and private key. The secret must contain keys named tls.crt and 
+    # tls.key that contain the certificate and private key to use for TLS
+    # The certificate and private key will be generated automatically if 
+    # it is not set
+    secretName: ""
+  ingress:
+    hosts:
+      ui: ui.polling.domain
+    annotations:
+      ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+  nodePort:
+    port: 30002
+      
+
+persistence:
+  enabled: true
+  # Setting it to "keep" to avoid removing PVCs during a helm delete 
+  # operation. Leaving it empty will delete PVCs after the chart deleted
+  resourcePolicy: "keep"
+  persistentVolumeClaim:
+    database:
+      existingClaim: ""
+      storageClass: ""
+      subPath: ""
+      accessMode: ReadWriteOnce
+      size: 1Gi
+
+ui:
+  image:
+    repository: cnych/polling-ui
+    tag: 0.0.1
+    pullPolicy: IfNotPresent
+    pullSecret: ""
+  replicas: 1
+# resources:
+#  requests:
+#    memory: 256Mi
+#    cpu: 100m
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  ## Additional deployment annotations
+  podAnnotations: {}
+
+api:
+  image:
+    repository: cnych/polling-api
+    tag: 0.0.1
+    pullPolicy: IfNotPresent
+    pullSecret: ""
+  replicas: 1
+  service:
+    port: 
+# resources:
+#  requests:
+#    memory: 256Mi
+#    cpu: 100m
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  ## Additional deployment annotations
+  podAnnotations: {}
+
+database:
+  # if external database is used, set "type" to "external"
+  # and fill the connection informations in "external" section
+  type: internal
+  internal:
+    image:
+      repository: mysql
+      tag: 5.7
+    # 使用的数据库名称
+    database: "polling"
+    # 数据库用户
+    username: "polling"
+    # 数据库用户密码
+    password: "polling321"
+    # 初始化的MYSQL超级用户密码
+    rootPassword: "changeit"
+    # resources:
+    #  requests:
+    #    memory: 256Mi
+    #    cpu: 100m
+    nodeSelector: {}
+    tolerations: []
+    affinity: {}
+  external:
+    host: "192.168.0.1"
+    port: "3306"
+    username: "user"
+    password: "password"
+    database: "polling"
+  ## Additional deployment annotations
+  podAnnotations: {}
