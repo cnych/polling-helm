@@ -24,7 +24,7 @@ persistence:
 ui:
   image:
     repository: cnych/polling-ui
-    tag: 0.0.2
+    tag: 0.0.3
     pullPolicy: IfNotPresent
     pullSecret: ""
   replicas: 1
@@ -41,7 +41,7 @@ ui:
 api:
   image:
     repository: cnych/polling-api
-    tag: 0.0.6
+    tag: 0.0.7
     pullPolicy: IfNotPresent
     pullSecret: ""
   replicas: 1
