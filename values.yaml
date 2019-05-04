@@ -21,12 +21,14 @@ persistence:
       accessMode: ReadWriteOnce
       size: 1Gi
 
+# imagePullSecrets:
+#   - name: myreg
+
 ui:
   image:
     repository: cnych/polling-ui
     tag: 0.0.3
     pullPolicy: IfNotPresent
-    pullSecret: ""
   replicas: 1
 # resources:
 #  requests:
@@ -43,10 +45,9 @@ api:
     repository: cnych/polling-api
     tag: 0.0.7
     pullPolicy: IfNotPresent
-    pullSecret: ""
   replicas: 1
   service:
-    port: 
+    port:
 # resources:
 #  requests:
 #    memory: 256Mi

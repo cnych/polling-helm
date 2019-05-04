@@ -21,10 +21,10 @@ spec:
 {{ toYaml .Values.ui.podAnnotations | indent 8 }}
 {{- end }}
     spec:
-{{- if .Values.ui.image.pullSecret -}}
+{{- if .Values.imagePullSecrets }}
       imagePullSecrets:
-      - name: {{ .Values.ui.image.pullSecret }}
-{{- end }}
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
       containers:
       - name: ui
         image: {{ .Values.ui.image.repository }}:{{ .Values.ui.image.tag }}

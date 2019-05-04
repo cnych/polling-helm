@@ -17,10 +17,10 @@ spec:
 {{ include "polling.matchLabels" . | indent 8 }}
         component: api
     spec:
-{{- if .Values.api.image.pullSecret -}}}}
+      {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
-      - name: {{ .Values.ui.image.pullSecret }}
-{{- end }}
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      {{- end }}
       containers:
         - name: api
           image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag }}"
